@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ESZP FC Webáruház</title>
+  <link rel="icon" type="image/png" href="favicon-96x96.png">
+<link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
+<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+<link rel="shortcut icon" href="/favicon.ico" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+<link rel="manifest" href="/site.webmanifest" />
+
+  <style>
+  :root {
+    --bg-1:#0a2540;  /* sötétkék háttér */
+    --bg-2:#184f72;
+    --acc:#5ef1f2;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:Arial, sans-serif;line-height:1.5;color:#053c3a;background:#f8fafc}
+  a{text-decoration:none}
+    *{box-sizing:border-box;margin:0;padding:0}
+
+    /* Banner */
+    .top-banner{
+      position:fixed;
+      top:0;
+      left:0;
+      width:100%;
+      background:linear-gradient(90deg,#ff9a00,#ff7a00); /* narancs átmenet */
+      color:#fff;
+      font-weight:700;
+      text-align:center;
+      padding:10px 16px;
+      z-index:9999;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      gap:12px;
+      box-shadow:0 2px 6px rgba(0,0,0,0.12);
+      font-family:Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+    }
+
+    .top-banner__text{
+      font-size:16px;
+      line-height:1.2;
+    }
+
+    /* Kisebb képernyőn kisebb betű */
+    @media (max-width:480px){
+      .top-banner__text{font-size:14px}
+      .top-banner{padding:8px 10px}
+    }
+
+  /* HERO */
+  .hero{
+    background:var(--bg-1);color:#fff;text-align:center;padding:80px 20px
+  }
+  .hero h1{font-size:2.5rem;margin-bottom:10px}
+  .hero p{max-width:600px;margin:0 auto 20px}
+  .badge{display:inline-block;margin-bottom:16px;padding:6px 12px;border-radius:999px;background:var(--bg-2);font-size:14px}
+  .cta{margin-top:20px;display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+  .btn{padding:10px 18px;border-radius:10px;font-weight:600;display:inline-flex;align-items:center;gap:6px}
+  .btn-primary{background:var(--acc);color:#053c3a}
+  .btn-ghost{background:rgba(255,255,255,.2);color:#fff}
+
+  /* STORE */
+  .wrap{max-width:1100px;margin:40px auto;padding:0 16px}
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:20px}
+  .card{background:#fff;border-radius:14px;box-shadow:0 2px 6px rgba(0,0,0,.1);overflow:hidden;display:flex;flex-direction:column}
+  .thumb{height:180px;background-size:cover;background-position:center}
+  .pad{padding:14px;display:flex;flex-direction:column;gap:6px;flex:1}
+  .muted{color:#64748b;font-size:14px}
+  .title{font-weight:700;font-size:16px}
+  .price{color:var(--bg-2);font-weight:700;font-size:15px}
+  .desc{font-size:13px;color:#475569;margin-top:4px}
+  .qtyrow{display:flex;gap:8px;align-items:center;margin-top:10px}
+  input.qty{width:64px;padding:8px 10px;border-radius:10px;border:1px solid #d6dde6;font-weight:600}
+  .btn-add{margin-left:auto;background:var(--bg-2);color:#e6f7ff}
+  .btn-add:hover{background:#243152}
+
+  /* CART */
+  .cart-toggle{
+    position:fixed;right:16px;bottom:16px;z-index:50;display:flex;align-items:center;gap:8px;
+    background:var(--bg-2);color:#fff;padding:12px 16px;border-radius:16px;box-shadow:0 10px 24px rgba(0,0,0,.2);
+  }
+  .drawer{
+    position:fixed;top:0;right:-420px;width:420px;max-width:100vw;height:100vh;background:#fff;
+    box-shadow:-14px 0 36px rgba(0,0,0,.15);transition:right .25s ease;z-index:60;display:flex;flex-direction:column;
+  }
+  .drawer.open{right:0}
+  .drawer header{padding:18px;border-bottom:1px solid #eef1f5;display:flex;align-items:center;justify-content:space-between}
+  .drawer h3{margin:0;font-size:18px}
+  .drawer .content{padding:14px 16px;flex:1;overflow:auto}
+  .cart-item{display:flex;gap:10px;padding:10px 6px;border-bottom:1px dashed #eef2f7}
+  .cart-item img{width:64px;height:64px;object-fit:cover;border-radius:10px;border:1px solid #e8eef5}
+  .cart-item h4{margin:0 0 4px;font-size:14px}
+  .cart-item .line{display:flex;align-items:center;gap:8px}
+  .cart-item input{width:60px;padding:6px 8px;border-radius:8px;border:1px solid #d6dde6}
+  .cart-item .remove{margin-left:auto;color:#b91c1c;cursor:pointer}
+  .summary{border-top:1px solid #eef1f5;padding:12px 16px}
+  .summary .row{display:flex;justify-content:space-between;margin:6px 0;font-size:14px}
+  .summary .total{font-weight:800;font-size:18px}
+  .checkout{padding:12px 16px 18px;border-top:1px solid #eef1f5}
+  .checkout input[type="email"]{width:100%;padding:12px 14px;border:1px solid #d6dde6;border-radius:12px;margin-bottom:10px;font-size:14px}
+  .btn-checkout{width:100%;background:var(--acc);color:#053c3a;padding:12px 14px;border-radius:12px;font-weight:700}
+  .note{color:#6b7280;font-size:12px;text-align:center;margin-top:6px}
+  .pill{display:inline-flex;align-items:center;gap:6px;padding:6px 10px;background:#eef7ff;color:#184f72;border-radius:999px;font-size:12px}
+  </style>
+</head>
+<body>
+  
+
+<!-- HERO -->
+<section class="hero">
+  <span class="badge"><i class="fa-solid fa-shield-halved"></i> ESZP FC • Hivatalos Áruház</span>
+  <h1>Támogasd a klubot, vásárolj stílusosan!</h1>
+  <p>Albumok, kártyacsomagok és teljes gyűjtemény. Válaszd ki, tedd kosárba, add meg az emailed, és rendelésedet visszaigazoljuk.</p>
+  <div class="cta">
+    <a href="#store" class="btn btn-primary"><i class="fa-solid fa-cart-shopping"></i> Vásárlás</a>
+    <a href="#store" class="btn btn-ghost"><i class="fa-regular fa-futbol"></i> Újdonságok</a>
+  </div>
+  
+</section>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4003336936372873"
+     crossorigin="anonymous"></script>
+
+<!-- STORE -->
+<div id="store" class="wrap">
+  <div class="grid" id="productGrid">
+    <!-- termékek JS-ből -->
+  </div>
+</div>
+   <div class="top-banner" id="topBanner" role="region" aria-label="Akciós sáv">
+    <div class="top-banner__text">BLACK FRIDAY<strong>-30%!!!</strong></div>
+  
+<!-- CART BUTTON -->
+<button class="cart-toggle" id="openCart">
+  <i class="fa-solid fa-bag-shopping"></i>
+  <span id="cartCount">0</span>
+</button>
+
+<!-- CART DRAWER -->
+<aside class="drawer" id="cartDrawer" aria-hidden="true">
+  <header>
+    <h3><i class="fa-solid fa-bag-shopping"></i> Kosarad</h3>
+    <button class="btn btn-ghost" id="closeCart"><i class="fa-solid fa-xmark"></i></button>
+  </header>
+  <div class="content" id="cartItems"></div>
+  <div class="summary">
+    <div class="row"><span>Részösszeg</span><strong id="subtotal">0 lej</strong></div>
+    <div class="row"><span>Szállítás</span><span class="pill"><i class="fa-solid fa-truck"></i> Emailben egyeztetve</span></div>
+    <div class="row total"><span>Végösszeg</span><span id="total">0 lej</span></div>
+  </div>
+  <div class="checkout">
+    <input type="email" id="buyerEmail" placeholder="Email címed" />
+    <button class="btn-checkout" id="checkoutBtn"><i class="fa-regular fa-paper-plane"></i> Rendelés emailben</button>
+    <div class="note">A rendelésről visszaigazoló emailt küldünk. Online fizetés nincs az oldalon.</div>
+  </div>
+</aside>
+
+<!-- EmailJS -->
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+<script>
+const PRODUCTS = [
+  {id:'meccsjegy', title:'jegy', desc:'meccsjegy a blokkosok ellen lelátó 1 , + 40 pont', price:0, img:'Screenshot_20251208_154115_Chrome.jpg'},
+  {id:'vip jegy', title:'vip', desc:'vip meccsjegy , a játékosok mellett a pályán , üdìtő és nasi a meccsre', price:10, img:'Screenshot_20251208_154508_Chrome.jpg'},
+  ];
+const grid=document.getElementById('productGrid');
+const fmt=v=>`${v} lej`;
+
+function renderProducts(){
+  grid.innerHTML=PRODUCTS.map(p=>`
+    <article class="card">
+      <div class="thumb" style="background-image:url('${p.img}')"></div>
+      <div class="pad">
+        <div class="title">${p.title}</div>
+        <div class="desc">${p.desc}</div>
+        <div class="price">${fmt(p.price)}</div>
+        <div class="qtyrow">
+          <label class="muted" for="qty-${p.id}">Mennyiség</label>
+          <input id="qty-${p.id}" class="qty" type="number" min="1" value="1"/>
+          <button class="btn btn-add" onclick="addToCart('${p.id}')"><i class="fa-solid fa-plus"></i> Hozzáadás</button>
+        </div>
+      </div>
+    </article>`).join('');
+}
+renderProducts();
+
+let cart=[];
+function saveCart(){localStorage.setItem('eszp-cart',JSON.stringify(cart));}
+function loadCart(){cart=JSON.parse(localStorage.getItem('eszp-cart')||'[]');}
+function cartQty(){return cart.reduce((s,i)=>s+i.qty,0);}
+function cartSubtotal(){return cart.reduce((s,i)=>s+i.qty*i.price,0);}
+
+function addToCart(id){
+  const p=PRODUCTS.find(x=>x.id===id);
+  const qty=parseInt(document.getElementById(`qty-${id}`).value)||1;
+  const ex=cart.find(i=>i.id===id);
+  if(ex){ex.qty+=qty;}else{cart.push({...p,qty});}
+  saveCart();updateCartUI();openCart();
+}
+function removeItem(id){cart=cart.filter(i=>i.id!==id);saveCart();updateCartUI();}
+function setQty(id,qty){const it=cart.find(i=>i.id===id);if(it){it.qty=Math.max(1,qty);saveCart();updateCartUI();}}
+
+function updateCartUI(){
+  document.getElementById('cartCount').textContent=cartQty();
+  const list=document.getElementById('cartItems');
+  if(cart.length===0){list.innerHTML='<p class="muted">A kosarad üres.</p>';}
+  else{list.innerHTML=cart.map(i=>`
+    <div class="cart-item">
+      <img src="${i.img}" alt="">
+      <div style="flex:1">
+        <h4>${i.title}</h4>
+        <div class="line">
+          <span class="muted">${fmt(i.price)} / db</span>
+          <input type="number" min="1" value="${i.qty}" onchange="setQty('${i.id}',this.value)">
+          <strong>${fmt(i.qty*i.price)}</strong>
+          <span class="remove" onclick="removeItem('${i.id}')"><i class="fa-solid fa-trash"></i></span>
+        </div>
+      </div>
+    </div>`).join('');}
+  const sub=cartSubtotal();
+  document.getElementById('subtotal').textContent=fmt(sub);
+  document.getElementById('total').textContent=fmt(sub);
+}
+
+const drawer=document.getElementById('cartDrawer');
+function openCart(){drawer.classList.add('open');}
+function closeCart(){drawer.classList.remove('open');}
+document.getElementById('openCart').onclick=openCart;
+document.getElementById('closeCart').onclick=closeCart;
+
+// EmailJS init
+(function(){ emailjs.init({publicKey:"jg2R9zN5TWRDejLfm"}); })();
+
+document.getElementById('checkoutBtn').onclick=async()=>{
+  if(cart.length===0){alert('A kosár üres.');return;}
+  const email=document.getElementById('buyerEmail').value.trim();
+  if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)){alert('Adj meg egy érvényes email címet.');return;}
+  const lines=cart.map(i=>`• ${i.title} x${i.qty} = ${fmt(i.qty*i.price)}`).join('\n');
+  const payload={buyer_email:email,order_lines:lines,order_total:fmt(cartSubtotal()),store_name:'ESZP FC Webshop'};
+  try{
+    await emailjs.send("Eszp_fc","template_mvhe4ig",payload);
+    alert('Köszönjük! Rendelésed elküldve. Hamarosan emailben visszaigazoljuk.');
+    cart=[];saveCart();updateCartUI();closeCart();
+  }catch(e){console.error(e);alert('Az oldal rendelési funkcoíja jelenleg nem müködik , írja meg az eszpfcofficial@gmail.com címre , hogy mit akar vásárolni.');}
+};
+
+loadCart();updateCartUI();
+</script>
+</body>
+</html>
