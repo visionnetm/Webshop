@@ -3,243 +3,427 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>cim/nev/mondat</title>
+  <title>ESZP FC • Hivatalos Webshop</title>
+  
+  <!-- FontAwesome ikonok beágyazása -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+  <!-- Google Fonts a modernebb megjelenésért -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+
   <style>
   :root {
-    --bg-1:#0a2540;  /* sötétkék háttér */
-    --bg-2:#184f72;
-    --acc:#5ef1f2;
+    --bg-1: #0a2540;   /* Sötétkék alapszín */
+    --bg-2: #184f72;   /* Másodlagos kék */
+    --acc: #5ef1f2;    /* Türkiz akcentus */
+    --text-dark: #053c3a;
+    --text-muted: #64748b;
+    --light-gray: #f8fafc;
   }
-  *{box-sizing:border-box;margin:0;padding:0}
-  body{font-family:Arial, sans-serif;line-height:1.5;color:#053c3a;background:#f8fafc}
-  a{text-decoration:none}
-    *{box-sizing:border-box;margin:0;padding:0}
 
-    /* Banner */
-    .top-banner{
-      position:fixed;
-      top:0;
-      left:0;
-      width:100%;
-      background:linear-gradient(90deg,#ff9a00,#ff7a00); /* narancs átmenet */
-      color:#fff;
-      font-weight:700;
-      text-align:center;
-      padding:10px 16px;
-      z-index:9999;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      gap:12px;
-      box-shadow:0 2px 6px rgba(0,0,0,0.12);
-      font-family:Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
-    }
-
-    .top-banner__text{
-      font-size:16px;
-      line-height:1.2;
-    }
-
-    /* Kisebb képernyőn kisebb betű */
-    @media (max-width:480px){
-      .top-banner__text{font-size:14px}
-      .top-banner{padding:8px 10px}
-    }
-
-  /* HERO */
-  .hero{
-    background:var(--bg-1);color:#fff;text-align:center;padding:80px 20px
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Inter', sans-serif;
   }
-  .hero h1{font-size:2.5rem;margin-bottom:10px}
-  .hero p{max-width:600px;margin:0 auto 20px}
-  .badge{display:inline-block;margin-bottom:16px;padding:6px 12px;border-radius:999px;background:var(--bg-2);font-size:14px}
-  .cta{margin-top:20px;display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
-  .btn{padding:10px 18px;border-radius:10px;font-weight:600;display:inline-flex;align-items:center;gap:6px}
-  .btn-primary{background:var(--acc);color:#053c3a}
-  .btn-ghost{background:rgba(255,255,255,.2);color:#fff}
 
-  /* STORE */
-  .wrap{max-width:1100px;margin:40px auto;padding:0 16px}
-  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:20px}
-  .card{background:#fff;border-radius:14px;box-shadow:0 2px 6px rgba(0,0,0,.1);overflow:hidden;display:flex;flex-direction:column}
-  .thumb{height:180px;background-size:cover;background-position:center}
-  .pad{padding:14px;display:flex;flex-direction:column;gap:6px;flex:1}
-  .muted{color:#64748b;font-size:14px}
-  .title{font-weight:700;font-size:16px}
-  .price{color:var(--bg-2);font-weight:700;font-size:15px}
-  .desc{font-size:13px;color:#475569;margin-top:4px}
-  .qtyrow{display:flex;gap:8px;align-items:center;margin-top:10px}
-  input.qty{width:64px;padding:8px 10px;border-radius:10px;border:1px solid #d6dde6;font-weight:600}
-  .btn-add{margin-left:auto;background:var(--bg-2);color:#e6f7ff}
-  .btn-add:hover{background:#243152}
+  body {
+    line-height: 1.5;
+    color: var(--text-dark);
+    background: var(--light-gray);
+    padding-top: 40px; /* Hely a fix felső bannernek */
+  }
 
-  /* CART */
-  .cart-toggle{
-    position:fixed;right:16px;bottom:16px;z-index:50;display:flex;align-items:center;gap:8px;
-    background:var(--bg-2);color:#fff;padding:12px 16px;border-radius:16px;box-shadow:0 10px 24px rgba(0,0,0,.2);
+  a { text-decoration: none; }
+
+  /* Felső akciós sáv */
+  .top-banner {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background: linear-gradient(90deg, #ff9a00, #ff7a00);
+    color: #fff;
+    font-weight: 700;
+    text-align: center;
+    padding: 10px 16px;
+    z-index: 9999;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.12);
+    font-size: 14px;
   }
-  .drawer{
-    position:fixed;top:0;right:-420px;width:420px;max-width:100vw;height:100vh;background:#fff;
-    box-shadow:-14px 0 36px rgba(0,0,0,.15);transition:right .25s ease;z-index:60;display:flex;flex-direction:column;
+
+  /* HERO SZKCIÓ */
+  .hero {
+    background: var(--bg-1);
+    color: #fff;
+    text-align: center;
+    padding: 80px 20px;
   }
-  .drawer.open{right:0}
-  .drawer header{padding:18px;border-bottom:1px solid #eef1f5;display:flex;align-items:center;justify-content:space-between}
-  .drawer h3{margin:0;font-size:18px}
-  .drawer .content{padding:14px 16px;flex:1;overflow:auto}
-  .cart-item{display:flex;gap:10px;padding:10px 6px;border-bottom:1px dashed #eef2f7}
-  .cart-item img{width:64px;height:64px;object-fit:cover;border-radius:10px;border:1px solid #e8eef5}
-  .cart-item h4{margin:0 0 4px;font-size:14px}
-  .cart-item .line{display:flex;align-items:center;gap:8px}
-  .cart-item input{width:60px;padding:6px 8px;border-radius:8px;border:1px solid #d6dde6}
-  .cart-item .remove{margin-left:auto;color:#b91c1c;cursor:pointer}
-  .summary{border-top:1px solid #eef1f5;padding:12px 16px}
-  .summary .row{display:flex;justify-content:space-between;margin:6px 0;font-size:14px}
-  .summary .total{font-weight:800;font-size:18px}
-  .checkout{padding:12px 16px 18px;border-top:1px solid #eef1f5}
-  .checkout input[type="email"]{width:100%;padding:12px 14px;border:1px solid #d6dde6;border-radius:12px;margin-bottom:10px;font-size:14px}
-  .btn-checkout{width:100%;background:var(--acc);color:#053c3a;padding:12px 14px;border-radius:12px;font-weight:700}
-  .note{color:#6b7280;font-size:12px;text-align:center;margin-top:6px}
-  .pill{display:inline-flex;align-items:center;gap:6px;padding:6px 10px;background:#eef7ff;color:#184f72;border-radius:999px;font-size:12px}
+  .hero h1 {
+    font-size: 2.8rem;
+    margin-bottom: 15px;
+    font-weight: 800;
+  }
+  .hero p {
+    max-width: 600px;
+    margin: 0 auto 25px;
+    color: #cbd5e1;
+  }
+  .badge {
+    display: inline-block;
+    margin-bottom: 16px;
+    padding: 6px 16px;
+    border-radius: 999px;
+    background: var(--bg-2);
+    font-size: 14px;
+    font-weight: 600;
+  }
+  .cta {
+    display: flex;
+    gap: 12px;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+  .btn {
+    padding: 12px 24px;
+    border-radius: 10px;
+    font-weight: 600;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+    border: none;
+    transition: all 0.2s ease;
+  }
+  .btn-primary { background: var(--acc); color: var(--text-dark); }
+  .btn-primary:hover { opacity: 0.9; transform: translateY(-1px); }
+  .btn-ghost { background: rgba(255,255,255,.15); color: #fff; }
+  .btn-ghost:hover { background: rgba(255,255,255,.25); }
+
+  /* TERMÉK RÁCS (STORE) */
+  .wrap {
+    max-width: 1100px;
+    margin: 40px auto;
+    padding: 0 16px;
+  }
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 24px;
+  }
+  .card {
+    background: #fff;
+    border-radius: 16px;
+    box-shadow: 0 4px 12px rgba(0,0,0,.05);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.2s;
+  }
+  .card:hover { transform: translateY(-4px); }
+  .thumb {
+    height: 220px;
+    background-size: cover;
+    background-position: center;
+    background-color: #eaeaea;
+  }
+  .pad {
+    padding: 18px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    flex: 1;
+  }
+  .muted { color: var(--text-muted); font-size: 14px; }
+  .title { font-weight: 700; font-size: 18px; color: var(--bg-1); }
+  .desc { font-size: 13px; color: #475569; min-height: 38px; }
+  .price { color: var(--bg-2); font-weight: 800; font-size: 17px; margin-top: auto; }
+  
+  .qtyrow {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    margin-top: 12px;
+    border-top: 1px solid #f1f5f9;
+    padding-top: 12px;
+  }
+  input.qty {
+    width: 60px;
+    padding: 8px;
+    border-radius: 8px;
+    border: 1px solid #cbd5e1;
+    font-weight: 600;
+    text-align: center;
+  }
+  .btn-add {
+    margin-left: auto;
+    background: var(--bg-2);
+    color: #e6f7ff;
+    padding: 8px 14px;
+    font-size: 14px;
+  }
+  .btn-add:hover { background: var(--bg-1); }
+
+  /* LEBEGŐ KOSÁR GOMB */
+  .cart-toggle {
+    position: fixed; right: 24px; bottom: 24px; z-index: 50; 
+    display: flex; align-items: center; gap: 10px; border: none;
+    background: var(--bg-1); color: #fff; padding: 16px 20px; 
+    border-radius: 50px; box-shadow: 0 10px 25px rgba(0,0,0,.3);
+    cursor: pointer; font-size: 16px; font-weight: 600;
+  }
+  #cartCount {
+    background: var(--acc); color: var(--text-dark);
+    padding: 2px 8px; border-radius: 99px; font-size: 13px; font-weight: 700;
+  }
+
+  /* KOSÁR OLDALSÁV (DRAWER) */
+  .drawer {
+    position: fixed; top: 0; right: -450px; width: 450px; max-width: 100vw; height: 100vh; 
+    background: #fff; box-shadow: -14px 0 36px rgba(0,0,0,.15); 
+    transition: right .3s ease-in-out; z-index: 99999; display: flex; flex-direction: column;
+  }
+  .drawer.open { right: 0; }
+  .drawer header { 
+    padding: 20px; border-bottom: 1px solid #e2e8f0; 
+    display: flex; align-items: center; justify-content: space-between;
+    background: var(--bg-1); color: white;
+  }
+  .drawer h3 { margin: 0; font-size: 18px; display: flex; align-items: center; gap: 8px; }
+  .drawer .content { padding: 16px; flex: 1; overflow-y: auto; }
+  
+  /* Kosár elemek */
+  .cart-item { display: flex; gap: 12px; padding: 12px 0; border-bottom: 1px dashed #e2e8f0; align-items: center;}
+  .cart-item img { width: 60px; height: 60px; object-fit: cover; border-radius: 8px; border: 1px solid #e2e8f0; }
+  .cart-item h4 { margin: 0 0 4px; font-size: 14px; color: var(--bg-1); }
+  .cart-item .line { display: flex; align-items: center; gap: 10px; width: 100%; }
+  .cart-item input { width: 50px; padding: 4px; border-radius: 6px; border: 1px solid #cbd5e1; text-align: center; }
+  .cart-item .remove { margin-left: auto; color: #ef4444; cursor: pointer; padding: 4px; }
+  .cart-item .remove:hover { color: #b91c1c; }
+
+  /* Összegzés & Checkout */
+  .summary { border-top: 1px solid #e2e8f0; padding: 16px; background: #f8fafc; }
+  .summary .row { display: flex; justify-content: space-between; margin: 8px 0; font-size: 14px; }
+  .summary .total { font-weight: 800; font-size: 19px; color: var(--bg-1); margin-top: 12px; border-top: 1px solid #cbd5e1; padding-top: 12px; }
+  .pill { display: inline-flex; align-items: center; gap: 6px; padding: 4px 10px; background: #e0f2fe; color: #0369a1; border-radius: 999px; font-size: 12px; font-weight: 600; }
+  
+  .checkout { padding: 16px; border-top: 1px solid #e2e8f0; }
+  .checkout input[type="email"] { width: 100%; padding: 12px 14px; border: 1px solid #cbd5e1; border-radius: 10px; margin-bottom: 12px; font-size: 14px; }
+  .checkout input[type="email"]:focus { outline: 2px solid var(--bg-2); }
+  .btn-checkout { width: 100%; background: var(--acc); color: var(--text-dark); padding: 14px; border-radius: 10px; font-weight: 700; border: none; cursor: pointer; font-size: 15px; }
+  .btn-checkout:hover { opacity: 0.95; }
+  .note { color: var(--text-muted); font-size: 12px; text-align: center; margin-top: 8px; line-height: 1.4; }
+
+  @media (max-width: 480px) {
+    .hero h1 { font-size: 2rem; }
+    .drawer { width: 100%; }
+  }
   </style>
 </head>
 <body>
-  
 
-<!-- HERO -->
-<section class="hero">
-  <span class="badge"><i class="fa-solid fa-shield-halved"></i> ESZP FC • Hivatalos Áruház</span>
-  <h1>valamu szöveg ha kell</h1>
-  <div class="cta">
-    <a href="#store" class="btn btn-primary"><i class="fa-solid fa-cart-shopping"></i> Vásárlás</a>
-    <a href="#store" class="btn btn-ghost"><i class="fa-regular fa-futbol"></i> Újdonságok</a>
+  <!-- FELSŐ AJÁNLAT BANNER -->
+  <div class="top-banner" id="topBanner" role="region" aria-label="Akciós sáv">
+    Szezonközi kiárusítás az ESZP FC-nél! Minden termékre <strong>-30% kedvezmény!!!</strong>
   </div>
-  
-</section>
-  
-<!-- STORE -->
-<div id="store" class="wrap">
-  <div class="grid" id="productGrid">
-    <!-- termékek JS-ből -->
-  </div>
-</div>
-  
-   <div class="top-banner" id="topBanner" role="region" aria-label="Akciós sáv">
-    <div class="top-banner__text">valami ajánlat<strong>pl: -30%!!!</strong></div>
-  
-<!-- CART BUTTON -->
-<button class="cart-toggle" id="openCart">
-  <i class="fa-solid fa-bag-shopping"></i>
-  <span id="cartCount">0</span>
-</button>
 
-<!-- CART DRAWER -->
-<aside class="drawer" id="cartDrawer" aria-hidden="true">
-  <header>
-    <h3><i class="fa-solid fa-bag-shopping"></i> Kosarad</h3>
-    <button class="btn btn-ghost" id="closeCart"><i class="fa-solid fa-xmark"></i></button>
-  </header>
-  <div class="content" id="cartItems"></div>
-  <div class="summary">
-    <div class="row"><span>Részösszeg</span><strong id="subtotal">0 lej</strong></div>
-    <div class="row"><span>Szállítás</span><span class="pill"><i class="fa-solid fa-truck"></i> Emailben egyeztetve</span></div>
-    <div class="row total"><span>Végösszeg</span><span id="total">0 lej</span></div>
-  </div>
-  <div class="checkout">
-    <input type="email" id="buyerEmail" placeholder="Email címed" />
-    <button class="btn-checkout" id="checkoutBtn"><i class="fa-regular fa-paper-plane"></i> Rendelés emailben</button>
-    <div class="note">A rendelésről visszaigazoló emailt küldünk. Online fizetés nincs az oldalon.</div>
-  </div>
-</aside>
+  <!-- HERO SZEKCIÓ -->
+  <section class="hero">
+    <span class="badge"><i class="fa-solid fa-shield-halved"></i> ESZP FC • Hivatalos Áruház</span>
+    <h1>Szurkolj a csapatnak stílusosan!</h1>
+    <p>Válogass hivatalos merch termékeink közül. Rendeld meg online, fizesd és vedd át személyesen vagy egyeztetett módon!</p>
+    <div class="cta">
+      <a href="#store" class="btn btn-primary"><i class="fa-solid fa-cart-shopping"></i> Irány a bolt</a>
+      <a href="#store" class="btn btn-ghost"><i class="fa-regular fa-futbol"></i> Legújabb kollekció</a>
+    </div>
+  </section>
+    
+  <!-- BOLT RÁCS -->
+  <main id="store" class="wrap">
+    <div class="grid" id="productGrid">
+      <!-- A termékeket a JavaScript generálja ide -->
+    </div>
+  </main>
+    
+  <!-- LEBEGŐ KOSÁR NYITÓ GOMB -->
+  <button class="cart-toggle" id="openCart">
+    <i class="fa-solid fa-bag-shopping"></i>
+    <span id="cartCount">0</span>
+  </button>
 
-<!-- EmailJS -->
-<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
-<script>
-const PRODUCTS = [
-  {id:'termek1', title:'termekq', desc:'leiras', price:ár, img:'valami kep'},
-  {id:'termek2', title:'termek2', desc:'', price:ár, img:'valami kep'},
+  <!-- KOSÁR OLDALSÁV (DRAWER) -->
+  <aside class="drawer" id="cartDrawer" aria-hidden="true">
+    <header>
+      <h3><i class="fa-solid fa-bag-shopping"></i> Kosarad tartalma</h3>
+      <button class="btn btn-ghost" id="closeCart" style="padding: 5px 10px;"><i class="fa-solid fa-xmark"></i></button>
+    </header>
+    
+    <div class="content" id="cartItems">
+      <!-- Kosár elemek JS-ből -->
+    </div>
+    
+    <div class="summary">
+      <div class="row"><span>Részösszeg</span><strong id="subtotal">0 lej</strong></div>
+      <div class="row"><span>Szállítás</span><span class="pill"><i class="fa-solid fa-truck"></i> Emailben egyeztetve</span></div>
+      <div class="row total"><span>Végösszeg</span><span id="total">0 lej</span></div>
+    </div>
+    
+    <div class="checkout">
+      <input type="email" id="buyerEmail" placeholder="Email címed (pl. info@gmail.com)" required />
+      <button class="btn-checkout" id="checkoutBtn"><i class="fa-regular fa-paper-plane"></i> Rendelés elküldése emailben</button>
+      <div class="note">A rendelésről visszaigazolást küldünk. Közvetlen online bankkártyás fizetés nincs az oldalon.</div>
+    </div>
+  </aside>
+
+  <!-- EmailJS könyvtár -->
+  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+  
+  <script>
+  // TERMÉK ADATBÁZIS (Minta adatokkal feltöltve, az árak számokká javítva)
+  const PRODUCTS = [
+    {id:'termek1', title:'ESZP FC Hazai Mez 25/26', desc:'Hivatalos, lélegző anyagú hazai mez címerrel ellátva.', price: 150, img:'https://images.unsplash.com/photo-1577223625856-75d910935270?auto=format&fit=crop&w=500&q=80'},
+    {id:'termek2', title:'Hivatalos Szurkolói Sál', desc:'Kötött, prémium minőségű sál a hideg meccsnapokra.', price: 50, img:'https://images.unsplash.com/photo-1544816155-12df9643f363?auto=format&fit=crop&w=500&q=80'},
+    {id:'termek3', title:'ESZP FC Sport Kulacs', desc:'750ml-es strapabíró alumínium kulacs edzésekhez.', price: 35, img:'https://images.unsplash.com/photo-1602143407151-7111542de6e8?auto=format&fit=crop&w=500&q=80'}
   ];
-const grid=document.getElementById('productGrid');
-const fmt=v=>`${v} lej`;
 
-function renderProducts(){
-  grid.innerHTML=PRODUCTS.map(p=>`
-    <article class="card">
-      <div class="thumb" style="background-image:url('${p.img}')"></div>
-      <div class="pad">
-        <div class="title">${p.title}</div>
-        <div class="desc">${p.desc}</div>
-        <div class="price">${fmt(p.price)}</div>
-        <div class="qtyrow">
-          <label class="muted" for="qty-${p.id}">Mennyiség</label>
-          <input id="qty-${p.id}" class="qty" type="number" min="1" value="1"/>
-          <button class="btn btn-add" onclick="addToCart('${p.id}')"><i class="fa-solid fa-plus"></i> Hozzáadás</button>
+  const grid = document.getElementById('productGrid');
+  const fmt = v => `${v} lej`;
+
+  // Termékek kirajzolása a főoldalra
+  function renderProducts(){
+    grid.innerHTML = PRODUCTS.map(p => `
+      <article class="card">
+        <div class="thumb" style="background-image:url('${p.img}')"></div>
+        <div class="pad">
+          <div class="title">${p.title}</div>
+          <div class="desc">${p.desc}</div>
+          <div class="price">${fmt(p.price)}</div>
+          <div class="qtyrow">
+            <label class="muted" for="qty-${p.id}">Db:</label>
+            <input id="qty-${p.id}" class="qty" type="number" min="1" value="1"/>
+            <button class="btn btn-add" onclick="addToCart('${p.id}')"><i class="fa-solid fa-plus"></i> Kosárba</button>
+          </div>
         </div>
-      </div>
-    </article>`).join('');
-}
-renderProducts();
+      </article>`).join('');
+  }
+  renderProducts();
 
-let cart=[];
-function saveCart(){localStorage.setItem('eszp-cart',JSON.stringify(cart));}
-function loadCart(){cart=JSON.parse(localStorage.getItem('eszp-cart')||'[]');}
-function cartQty(){return cart.reduce((s,i)=>s+i.qty,0);}
-function cartSubtotal(){return cart.reduce((s,i)=>s+i.qty*i.price,0);}
+  // KOSÁR MECHANIKA (LocalStorage-dzsal szinkronizálva)
+  let cart = [];
+  function saveCart() { localStorage.setItem('eszp-cart', JSON.stringify(cart)); }
+  function loadCart() { cart = JSON.parse(localStorage.getItem('eszp-cart') || '[]'); }
+  function cartQty() { return cart.reduce((s, i) => s + i.qty, 0); }
+  function cartSubtotal() { return cart.reduce((s, i) => s + (i.qty * i.price), 0); }
 
-function addToCart(id){
-  const p=PRODUCTS.find(x=>x.id===id);
-  const qty=parseInt(document.getElementById(`qty-${id}`).value)||1;
-  const ex=cart.find(i=>i.id===id);
-  if(ex){ex.qty+=qty;}else{cart.push({...p,qty});}
-  saveCart();updateCartUI();openCart();
-}
-function removeItem(id){cart=cart.filter(i=>i.id!==id);saveCart();updateCartUI();}
-function setQty(id,qty){const it=cart.find(i=>i.id===id);if(it){it.qty=Math.max(1,qty);saveCart();updateCartUI();}}
+  function addToCart(id){
+    const p = PRODUCTS.find(x => x.id === id);
+    const qty = parseInt(document.getElementById(`qty-${id}`).value) || 1;
+    const ex = cart.find(i => i.id === id);
+    
+    if(ex) {
+      ex.qty += qty;
+    } else {
+      cart.push({...p, qty});
+    }
+    
+    saveCart();
+    updateCartUI();
+    openCart();
+    // Visszaállítja a beviteli mezőt 1-re hozzáadás után
+    document.getElementById(`qty-${id}`).value = 1;
+  }
 
-function updateCartUI(){
-  document.getElementById('cartCount').textContent=cartQty();
-  const list=document.getElementById('cartItems');
-  if(cart.length===0){list.innerHTML='<p class="muted">A kosarad üres.</p>';}
-  else{list.innerHTML=cart.map(i=>`
-    <div class="cart-item">
-      <img src="${i.img}" alt="">
-      <div style="flex:1">
-        <h4>${i.title}</h4>
-        <div class="line">
-          <span class="muted">${fmt(i.price)} / db</span>
-          <input type="number" min="1" value="${i.qty}" onchange="setQty('${i.id}',this.value)">
-          <strong>${fmt(i.qty*i.price)}</strong>
-          <span class="remove" onclick="removeItem('${i.id}')"><i class="fa-solid fa-trash"></i></span>
-        </div>
-      </div>
-    </div>`).join('');}
-  const sub=cartSubtotal();
-  document.getElementById('subtotal').textContent=fmt(sub);
-  document.getElementById('total').textContent=fmt(sub);
-}
+  function removeItem(id){
+    cart = cart.filter(i => i.id !== id);
+    saveCart();
+    updateCartUI();
+  }
 
-const drawer=document.getElementById('cartDrawer');
-function openCart(){drawer.classList.add('open');}
-function closeCart(){drawer.classList.remove('open');}
-document.getElementById('openCart').onclick=openCart;
-document.getElementById('closeCart').onclick=closeCart;
+  function setQty(id, qty){
+    const it = cart.find(i => i.id === id);
+    if(it){
+      it.qty = Math.max(1, parseInt(qty) || 1);
+      saveCart();
+      updateCartUI();
+    }
+  }
 
-// EmailJS init
-(function(){ emailjs.init({publicKey:"jg2R9zN5TWRDejLfm"}); })();
+  // Kosár felület frissítése
+  function updateCartUI(){
+    document.getElementById('cartCount').textContent = cartQty();
+    const list = document.getElementById('cartItems');
+    
+    if(cart.length === 0){
+      list.innerHTML = '<p class="muted" style="text-align:center; padding:40px 0;">A kosarad jelenleg üres.</p>';
+    } else {
+      list.innerHTML = cart.map(i => `
+        <div class="cart-item">
+          <img src="${i.img}" alt="${i.title}">
+          <div style="flex:1">
+            <h4>${i.title}</h4>
+            <div class="line">
+              <span class="muted">${fmt(i.price)} / db</span>
+              <input type="number" min="1" value="${i.qty}" onchange="setQty('${i.id}', this.value)">
+              <strong>${fmt(i.qty * i.price)}</strong>
+              <span class="remove" onclick="removeItem('${i.id}')"><i class="fa-solid fa-trash"></i></span>
+            </div>
+          </div>
+        </div>`).join('');
+    }
+    
+    const sub = cartSubtotal();
+    document.getElementById('subtotal').textContent = fmt(sub);
+    document.getElementById('total').textContent = fmt(sub);
+  }
 
-document.getElementById('checkoutBtn').onclick=async()=>{
-  if(cart.length===0){alert('A kosár üres.');return;}
-  const email=document.getElementById('buyerEmail').value.trim();
-  if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)){alert('Adj meg egy érvényes email címet.');return;}
-  const lines=cart.map(i=>`• ${i.title} x${i.qty} = ${fmt(i.qty*i.price)}`).join('\n');
-  const payload={buyer_email:email,order_lines:lines,order_total:fmt(cartSubtotal()),store_name:'ESZP FC Webshop'};
-  try{
-    await emailjs.send("Eszp_fc","template_mvhe4ig",payload);
-    alert('Köszönjük! Rendelésed elküldve. Hamarosan emailben visszaigazoljuk.');
-    cart=[];saveCart();updateCartUI();closeCart();
-  }catch(e){console.error(e);alert('Az oldal rendelési funkcoíja jelenleg nem müködik , írja meg az eszpfcofficial@gmail.com címre , hogy mit akar vásárolni.');}
-};
+  // Oldalsáv vezérlés
+  const drawer = document.getElementById('cartDrawer');
+  function openCart(){ drawer.classList.add('open'); drawer.setAttribute('aria-hidden', 'false'); }
+  function closeCart(){ drawer.classList.remove('open'); drawer.setAttribute('aria-hidden', 'true'); }
+  
+  document.getElementById('openCart').onclick = openCart;
+  document.getElementById('closeCart').onclick = closeCart;
 
-loadCart();updateCartUI();
-</script>
+  // EmailJS Inicializálás (A Te nyilvános kulcsoddal)
+  (function(){ emailjs.init({ publicKey: "jg2R9zN5TWRDejLfm" }); })();
+
+  // Rendelés elküldése gomb
+  document.getElementById('checkoutBtn').onclick = async () => {
+    if(cart.length === 0){ alert('A kosár üres.'); return; }
+    
+    const email = document.getElementById('buyerEmail').value.trim();
+    if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)){ alert('Adj meg egy érvényes email címet.'); return; }
+    
+    // Email szövegtörzs összeállítása a kosárból
+    const lines = cart.map(i => `• ${i.title} x ${i.qty} db = ${fmt(i.qty * i.price)}`).join('\n');
+    
+    const payload = {
+      buyer_email: email,
+      order_lines: lines,
+      order_total: fmt(cartSubtotal()),
+      store_name: 'ESZP FC Webshop'
+    };
+
+    try {
+      // Email küldése az EmailJS sablonodon keresztül
+      await emailjs.send("Eszp_fc", "template_mvhe4ig", payload);
+      alert('Köszönjük! Rendelésed elküldve. Hamarosan emailben visszaigazoljuk azt.');
+      
+      // Kosár ürítése sikeres vásárlás után
+      cart = [];
+      saveCart();
+      updateCartUI();
+      closeCart();
+      document.getElementById('buyerEmail').value = '';
+    } catch(e) {
+      console.error(e);
+      alert('Az oldal automata rendelési funkciója jelenleg nem működik. Kérjük, írd meg a rendelésed az eszpfcofficial@gmail.com címre, hogy mit szeretnél vásárolni!');
+    }
+  };
+
+  // Indításkor kosár betöltése
+  loadCart();
+  updateCartUI();
+  </script>
 </body>
 </html>
