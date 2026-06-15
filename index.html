@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>ESZP FC • Hivatalos Webshop</title>
+  <title>Prémium Webshop • Stílus és Minőség</title>
   
   <!-- FontAwesome ikonok beágyazása -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
@@ -31,7 +31,7 @@
     line-height: 1.5;
     color: var(--text-dark);
     background: var(--light-gray);
-    padding-top: 40px; /* Hely a fix felső bannernek */
+    padding-top: 40px; 
   }
 
   a { text-decoration: none; }
@@ -52,7 +52,7 @@
     font-size: 14px;
   }
 
-  /* HERO SZKCIÓ */
+  /* HERO SZEKCIÓ */
   .hero {
     background: var(--bg-1);
     color: #fff;
@@ -68,6 +68,7 @@
     max-width: 600px;
     margin: 0 auto 25px;
     color: #cbd5e1;
+    font-size: 16px;
   }
   .badge {
     display: inline-block;
@@ -121,12 +122,43 @@
     transition: transform 0.2s;
   }
   .card:hover { transform: translateY(-4px); }
-  .thumb {
+  
+  /* KÉPLAPOZÓ (SLIDER) CSS */
+  .thumb-container {
+    position: relative;
     height: 220px;
+    background-color: #eaeaea;
+    overflow: hidden;
+  }
+  .thumb {
+    width: 100%;
+    height: 100%;
     background-size: cover;
     background-position: center;
-    background-color: #eaeaea;
+    transition: background-image 0.3s ease-in-out;
   }
+  .slider-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(0, 0, 0, 0.4);
+    color: white;
+    border: none;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    z-index: 10;
+    transition: background 0.2s;
+  }
+  .slider-btn:hover { background: rgba(0, 0, 0, 0.8); }
+  .slider-prev { left: 8px; }
+  .slider-next { right: 8px; }
+
+  /* TERMÉK ADATOK CSS */
   .pad {
     padding: 18px;
     display: flex;
@@ -192,7 +224,6 @@
   .drawer h3 { margin: 0; font-size: 18px; display: flex; align-items: center; gap: 8px; }
   .drawer .content { padding: 16px; flex: 1; overflow-y: auto; }
   
-  /* Kosár elemek */
   .cart-item { display: flex; gap: 12px; padding: 12px 0; border-bottom: 1px dashed #e2e8f0; align-items: center;}
   .cart-item img { width: 60px; height: 60px; object-fit: cover; border-radius: 8px; border: 1px solid #e2e8f0; }
   .cart-item h4 { margin: 0 0 4px; font-size: 14px; color: var(--bg-1); }
@@ -201,7 +232,6 @@
   .cart-item .remove { margin-left: auto; color: #ef4444; cursor: pointer; padding: 4px; }
   .cart-item .remove:hover { color: #b91c1c; }
 
-  /* Összegzés & Checkout */
   .summary { border-top: 1px solid #e2e8f0; padding: 16px; background: #f8fafc; }
   .summary .row { display: flex; justify-content: space-between; margin: 8px 0; font-size: 14px; }
   .summary .total { font-weight: 800; font-size: 19px; color: var(--bg-1); margin-top: 12px; border-top: 1px solid #cbd5e1; padding-top: 12px; }
@@ -224,17 +254,17 @@
 
   <!-- FELSŐ AJÁNLAT BANNER -->
   <div class="top-banner" id="topBanner" role="region" aria-label="Akciós sáv">
-    Szezonközi kiárusítás az ESZP FC-nél! Minden termékre <strong>-30% kedvezmény!!!</strong>
+    🔥 Nyári Szezonális Akció: Minden prémium kiegészítőre <strong>-30% kedvezmény</strong> ezen a héten! 🔥
   </div>
 
   <!-- HERO SZEKCIÓ -->
   <section class="hero">
-    <span class="badge"><i class="fa-solid fa-shield-halved"></i> ESZP FC • Hivatalos Áruház</span>
-    <h1>Szurkolj a csapatnak stílusosan!</h1>
-    <p>Válogass hivatalos merch termékeink közül. Rendeld meg online, fizesd és vedd át személyesen vagy egyeztetett módon!</p>
+    <span class="badge"><i class="fa-solid fa-star"></i> Stílus és Minőség • Hivatalos Áruház</span>
+    <h1>Készülj fel a nyárra stílusosan!</h1>
+    <p>Válogass prémium utazási és mindennapi kiegészítőink közül. Válaszd ki a kedvenceidet, és add le a rendelésed egyszerűen, sorban állás nélkül.</p>
     <div class="cta">
-      <a href="#store" class="btn btn-primary"><i class="fa-solid fa-cart-shopping"></i> Irány a bolt</a>
-      <a href="#store" class="btn btn-ghost"><i class="fa-regular fa-futbol"></i> Legújabb kollekció</a>
+      <a href="#store" class="btn btn-primary"><i class="fa-solid fa-cart-shopping"></i> Kínálat megtekintése</a>
+      <a href="#store" class="btn btn-ghost"><i class="fa-regular fa-compass"></i> Újdonságok felfedezése</a>
     </div>
   </section>
     
@@ -264,7 +294,7 @@
     
     <div class="summary">
       <div class="row"><span>Részösszeg</span><strong id="subtotal">0 lej</strong></div>
-      <div class="row"><span>Szállítás</span><span class="pill"><i class="fa-solid fa-truck"></i> Emailben egyeztetve</span></div>
+      <div class="row"><span>Szállítás</span><span class="pill"><i class="fa-solid fa-envelope"></i> Emailben egyeztetve</span></div>
       <div class="row total"><span>Végösszeg</span><span id="total">0 lej</span></div>
     </div>
     
@@ -279,21 +309,66 @@
   <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
   
   <script>
-  // TERMÉK ADATBÁZIS (Minta adatokkal feltöltve, az árak számokká javítva)
+  // TERMÉK ADATBÁZIS TÖBB KÉPPEL (images tömb)
   const PRODUCTS = [
-    {id:'termek1', title:'ESZP FC Hazai Mez 25/26', desc:'Hivatalos, lélegző anyagú hazai mez címerrel ellátva.', price: 150, img:'https://images.unsplash.com/photo-1577223625856-75d910935270?auto=format&fit=crop&w=500&q=80'},
-    {id:'termek2', title:'Hivatalos Szurkolói Sál', desc:'Kötött, prémium minőségű sál a hideg meccsnapokra.', price: 50, img:'https://images.unsplash.com/photo-1544816155-12df9643f363?auto=format&fit=crop&w=500&q=80'},
-    {id:'termek3', title:'ESZP FC Sport Kulacs', desc:'750ml-es strapabíró alumínium kulacs edzésekhez.', price: 35, img:'https://images.unsplash.com/photo-1602143407151-7111542de6e8?auto=format&fit=crop&w=500&q=80'}
+    {
+      id: 'termek1', 
+      title: 'matching gyűrűk', 
+      desc: 'a méretet e-mailba egyesztessük rendelés után.', 
+      price: 5, 
+      images: [
+        'https://images.unsplash.com/photo-1553062407-98eeb64c6a62?auto=format&fit=crop&w=600&q=80',
+        'https://images.unsplash.com/photo-1547949003-9792a18a2601?auto=format&fit=crop&w=600&q=80',
+        'https://images.unsplash.com/photo-1622560480654-d96214fdc887?auto=format&fit=crop&w=600&q=80',
+        'https://images.unsplash.com/photo-1504274066651-8d31a536b11a?auto=format&fit=crop&w=600&q=80',
+        'https://images.unsplash.com/photo-1546938576-6e6a64f317cc?auto=format&fit=crop&w=600&q=80'
+      ]
+    },
+    {
+      id: 'termek2', 
+      title: 'Zajszűrős Fejhallgató', 
+      desc: 'Zárd ki a repülőgép vagy a vonat zaját. Kristálytiszta hangzás és 30 órás üzemidő egyetlen töltéssel.', 
+      price: 320, 
+      images: [
+        'https://images.unsplash.com/photo-1618366712010-f4ae9c647dcb?auto=format&fit=crop&w=600&q=80',
+        'https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&fit=crop&w=600&q=80',
+        'https://images.unsplash.com/photo-1590658268037-6bf12165a8df?auto=format&fit=crop&w=600&q=80',
+        'https://images.unsplash.com/photo-1484704849700-f032a568e944?auto=format&fit=crop&w=600&q=80',
+        'https://images.unsplash.com/photo-1520170350707-b2da59970118?auto=format&fit=crop&w=600&q=80'
+      ]
+    },
+    {
+      id: 'termek3', 
+      title: 'Okos Termosz Kijelzővel', 
+      desc: 'Rozsdamentes acélból készült, mely a fedélen lévő LED kijelzőn mutatja az ital hőmérsékletét. 12 órán át hőtartó.', 
+      price: 85, 
+      images: [
+        'https://images.unsplash.com/photo-1602143407151-7111542de6e8?auto=format&fit=crop&w=600&q=80',
+        'https://images.unsplash.com/photo-1613208034878-83804d9e7943?auto=format&fit=crop&w=600&q=80',
+        'https://images.unsplash.com/photo-1595085376033-ec916c52a32c?auto=format&fit=crop&w=600&q=80',
+        'https://images.unsplash.com/photo-1523362628745-0c100150b504?auto=format&fit=crop&w=600&q=80',
+        'https://images.unsplash.com/photo-1620803780360-1282ecb9ddb2?auto=format&fit=crop&w=600&q=80'
+      ]
+    }
   ];
 
   const grid = document.getElementById('productGrid');
   const fmt = v => `${v} lej`;
 
-  // Termékek kirajzolása a főoldalra
+  // Állapotváltozó az aktuális kép indexének tárolásához minden terméknél
+  const currentSlide = {};
+
+  // Termékek kirajzolása a főoldalra, hozzáadva a képlapozó szerkezetet
   function renderProducts(){
-    grid.innerHTML = PRODUCTS.map(p => `
+    grid.innerHTML = PRODUCTS.map(p => {
+      currentSlide[p.id] = 0; // Alapértelmezettként a 0. kép jelenik meg
+      return `
       <article class="card">
-        <div class="thumb" style="background-image:url('${p.img}')"></div>
+        <div class="thumb-container">
+          <div class="thumb" id="img-${p.id}" style="background-image:url('${p.images[0]}')"></div>
+          <button class="slider-btn slider-prev" onclick="changeSlide('${p.id}', -1)" aria-label="Előző kép"><i class="fa-solid fa-chevron-left"></i></button>
+          <button class="slider-btn slider-next" onclick="changeSlide('${p.id}', 1)" aria-label="Következő kép"><i class="fa-solid fa-chevron-right"></i></button>
+        </div>
         <div class="pad">
           <div class="title">${p.title}</div>
           <div class="desc">${p.desc}</div>
@@ -304,14 +379,32 @@
             <button class="btn btn-add" onclick="addToCart('${p.id}')"><i class="fa-solid fa-plus"></i> Kosárba</button>
           </div>
         </div>
-      </article>`).join('');
+      </article>`
+    }).join('');
   }
   renderProducts();
 
-  // KOSÁR MECHANIKA (LocalStorage-dzsal szinkronizálva)
+  // Képváltó funkció (Nyilak működtetése)
+  function changeSlide(productId, direction) {
+    const p = PRODUCTS.find(x => x.id === productId);
+    if (!p) return;
+    
+    // Index frissítése (ha túllép, körbeér)
+    currentSlide[productId] += direction;
+    if (currentSlide[productId] < 0) {
+      currentSlide[productId] = p.images.length - 1;
+    } else if (currentSlide[productId] >= p.images.length) {
+      currentSlide[productId] = 0;
+    }
+    
+    // Új kép beállítása
+    document.getElementById(`img-${productId}`).style.backgroundImage = `url('${p.images[currentSlide[productId]]}')`;
+  }
+
+  // KOSÁR MECHANIKA
   let cart = [];
-  function saveCart() { localStorage.setItem('eszp-cart', JSON.stringify(cart)); }
-  function loadCart() { cart = JSON.parse(localStorage.getItem('eszp-cart') || '[]'); }
+  function saveCart() { localStorage.setItem('premium-shop-cart', JSON.stringify(cart)); }
+  function loadCart() { cart = JSON.parse(localStorage.getItem('premium-shop-cart') || '[]'); }
   function cartQty() { return cart.reduce((s, i) => s + i.qty, 0); }
   function cartSubtotal() { return cart.reduce((s, i) => s + (i.qty * i.price), 0); }
 
@@ -329,7 +422,6 @@
     saveCart();
     updateCartUI();
     openCart();
-    // Visszaállítja a beviteli mezőt 1-re hozzáadás után
     document.getElementById(`qty-${id}`).value = 1;
   }
 
@@ -348,7 +440,6 @@
     }
   }
 
-  // Kosár felület frissítése
   function updateCartUI(){
     document.getElementById('cartCount').textContent = cartQty();
     const list = document.getElementById('cartItems');
@@ -356,9 +447,10 @@
     if(cart.length === 0){
       list.innerHTML = '<p class="muted" style="text-align:center; padding:40px 0;">A kosarad jelenleg üres.</p>';
     } else {
+      // A kosárban mindig az első képet (images[0]) mutatjuk piciben
       list.innerHTML = cart.map(i => `
         <div class="cart-item">
-          <img src="${i.img}" alt="${i.title}">
+          <img src="${i.images[0]}" alt="${i.title}">
           <div style="flex:1">
             <h4>${i.title}</h4>
             <div class="line">
@@ -376,7 +468,6 @@
     document.getElementById('total').textContent = fmt(sub);
   }
 
-  // Oldalsáv vezérlés
   const drawer = document.getElementById('cartDrawer');
   function openCart(){ drawer.classList.add('open'); drawer.setAttribute('aria-hidden', 'false'); }
   function closeCart(){ drawer.classList.remove('open'); drawer.setAttribute('aria-hidden', 'true'); }
@@ -387,29 +478,25 @@
   // EmailJS Inicializálás (A Te nyilvános kulcsoddal)
   (function(){ emailjs.init({ publicKey: "jg2R9zN5TWRDejLfm" }); })();
 
-  // Rendelés elküldése gomb
   document.getElementById('checkoutBtn').onclick = async () => {
     if(cart.length === 0){ alert('A kosár üres.'); return; }
     
     const email = document.getElementById('buyerEmail').value.trim();
     if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)){ alert('Adj meg egy érvényes email címet.'); return; }
     
-    // Email szövegtörzs összeállítása a kosárból
     const lines = cart.map(i => `• ${i.title} x ${i.qty} db = ${fmt(i.qty * i.price)}`).join('\n');
     
     const payload = {
       buyer_email: email,
       order_lines: lines,
       order_total: fmt(cartSubtotal()),
-      store_name: 'ESZP FC Webshop'
+      store_name: 'Prémium Webshop'
     };
 
     try {
-      // Email küldése az EmailJS sablonodon keresztül
       await emailjs.send("Eszp_fc", "template_mvhe4ig", payload);
-      alert('Köszönjük! Rendelésed elküldve. Hamarosan emailben visszaigazoljuk azt.');
+      alert('Köszönjük! Rendelésed sikeresen rögzítettük. Hamarosan emailben felvesszük veled a kapcsolatot a részletekkel.');
       
-      // Kosár ürítése sikeres vásárlás után
       cart = [];
       saveCart();
       updateCartUI();
@@ -417,11 +504,10 @@
       document.getElementById('buyerEmail').value = '';
     } catch(e) {
       console.error(e);
-      alert('Az oldal automata rendelési funkciója jelenleg nem működik. Kérjük, írd meg a rendelésed az eszpfcofficial@gmail.com címre, hogy mit szeretnél vásárolni!');
+      alert('Az oldal automata rendelési funkciója jelenleg nem működik. Kérjük, próbáld újra később!');
     }
   };
 
-  // Indításkor kosár betöltése
   loadCart();
   updateCartUI();
   </script>
