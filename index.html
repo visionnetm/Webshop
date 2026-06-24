@@ -10,34 +10,58 @@
 
   <style>
   :root {
-    --bg-1: #0a2540;   
-    --bg-2: #184f72;   
-    --acc: #5ef1f2;    
-    --text-dark: #053c3a;
+    --bg-1: #250938;   /* ÚJ: Sötét lila a kék helyett */
+    --bg-2: #5c134f;   /* ÚJ: Mély rózsaszínes lila */
+    --acc: #f472b6;    /* ÚJ: Élénk rózsaszín kiemelés és gombok */
+    --text-dark: #250938;
     --text-muted: #64748b;
-    --light-gray: #f8fafc;
+    --light-gray: #faf5ff; /* ÚJ: Enyhén lilás-fehér tiszta háttér */
   }
 
   * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Inter', sans-serif; }
   body { line-height: 1.5; color: var(--text-dark); background: var(--light-gray); padding-top: 40px; }
   a { text-decoration: none; }
 
-  .top-banner { position: fixed; top: 0; left: 0; width: 100%; background: linear-gradient(90deg, #ff9a00, #ff7a00); color: #fff; font-weight: 700; text-align: center; padding: 10px 16px; z-index: 9999; box-shadow: 0 2px 6px rgba(0,0,0,0.12); font-size: 14px; }
+  /* ÚJ: Rózsaszínes-lilás szezonális banner */
+  .top-banner { position: fixed; top: 0; left: 0; width: 100%; background: linear-gradient(90deg, #ec4899, #a855f7); color: #fff; font-weight: 700; text-align: center; padding: 10px 16px; z-index: 9999; box-shadow: 0 2px 6px rgba(0,0,0,0.12); font-size: 14px; }
 
-  .hero { background: var(--bg-1); color: #fff; text-align: center; padding: 80px 20px; }
+  .hero { background: var(--bg-1); color: #fff; text-align: center; padding: 60px 20px 80px; }
+  
+  /* ÚJ: Logó stílusok */
+  .brand-logo {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 24px;
+    font-size: 26px;
+    font-weight: 800;
+    color: #fff;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+  }
+  .brand-logo i {
+    color: var(--acc);
+    font-size: 30px;
+    filter: drop-shadow(0 0 8px rgba(244, 114, 182, 0.6));
+  }
+  .brand-logo img {
+    height: 45px; /* Ha igazi képet raksz be, ez méretezi */
+    width: auto;
+  }
+
   .hero h1 { font-size: 2.8rem; margin-bottom: 15px; font-weight: 800; }
-  .hero p { max-width: 600px; margin: 0 auto 25px; color: #cbd5e1; font-size: 16px; }
-  .badge { display: inline-block; margin-bottom: 16px; padding: 6px 16px; border-radius: 999px; background: var(--bg-2); font-size: 14px; font-weight: 600; }
+  .hero p { max-width: 600px; margin: 0 auto 25px; color: #e9d5ff; font-size: 16px; }
+  .badge { display: inline-block; margin-bottom: 16px; padding: 6px 16px; border-radius: 999px; background: var(--bg-2); font-size: 14px; font-weight: 600; color: #fdf4ff; }
   .cta { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
   .btn { padding: 12px 24px; border-radius: 10px; font-weight: 600; display: inline-flex; align-items: center; gap: 8px; cursor: pointer; border: none; transition: all 0.2s ease; }
-  .btn-primary { background: var(--acc); color: var(--text-dark); }
+  .btn-primary { background: var(--acc); color: var(--bg-1); }
   .btn-primary:hover { opacity: 0.9; transform: translateY(-1px); }
-  .btn-ghost { background: rgba(255,255,255,.15); color: #fff; }
-  .btn-ghost:hover { background: rgba(255,255,255,.25); }
+  .btn-ghost { background: rgba(255,255,255,.12); color: #fff; border: 1px solid rgba(255,255,255,0.2); }
+  .btn-ghost:hover { background: rgba(255,255,255,.2); }
 
   .wrap { max-width: 1100px; margin: 40px auto; padding: 0 16px; }
   .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 24px; }
-  .card { background: #fff; border-radius: 16px; box-shadow: 0 4px 12px rgba(0,0,0,.05); overflow: hidden; display: flex; flex-direction: column; transition: transform 0.2s; }
+  .card { background: #fff; border-radius: 16px; box-shadow: 0 4px 12px rgba(37,9,56,.05); overflow: hidden; display: flex; flex-direction: column; transition: transform 0.2s; }
   .card:hover { transform: translateY(-4px); }
   
   .thumb-container { position: relative; height: 220px; background-color: #eaeaea; overflow: hidden; }
@@ -53,18 +77,17 @@
   .desc { font-size: 13px; color: #475569; min-height: 38px; }
   .price { color: var(--bg-2); font-weight: 800; font-size: 17px; margin-top: auto; }
   
-  .qtyrow { display: flex; gap: 8px; align-items: center; margin-top: 12px; border-top: 1px solid #f1f5f9; padding-top: 12px; }
+  .qtyrow { display: flex; gap: 8px; align-items: center; margin-top: 12px; border-top: 1px solid #f3e8ff; padding-top: 12px; }
   input.qty { width: 60px; padding: 8px; border-radius: 8px; border: 1px solid #cbd5e1; font-weight: 600; text-align: center; }
-  .btn-add { margin-left: auto; background: var(--bg-2); color: #e6f7ff; padding: 8px 14px; font-size: 14px; }
+  .btn-add { margin-left: auto; background: var(--bg-2); color: #fdf4ff; padding: 8px 14px; font-size: 14px; }
   .btn-add:hover { background: var(--bg-1); }
 
-  .cart-toggle { position: fixed; right: 24px; bottom: 24px; z-index: 50; display: flex; align-items: center; gap: 10px; border: none; background: var(--bg-1); color: #fff; padding: 16px 20px; border-radius: 50px; box-shadow: 0 10px 25px rgba(0,0,0,.3); cursor: pointer; font-size: 16px; font-weight: 600; }
-  #cartCount { background: var(--acc); color: var(--text-dark); padding: 2px 8px; border-radius: 99px; font-size: 13px; font-weight: 700; }
+  .cart-toggle { position: fixed; right: 24px; bottom: 24px; z-index: 50; display: flex; align-items: center; gap: 10px; border: none; background: var(--bg-1); color: #fff; padding: 16px 20px; border-radius: 50px; box-shadow: 0 10px 25px rgba(37,9,56,.3); cursor: pointer; font-size: 16px; font-weight: 600; }
+  #cartCount { background: var(--acc); color: var(--bg-1); padding: 2px 8px; border-radius: 99px; font-size: 13px; font-weight: 700; }
 
-  /* KOSÁR OLDALSÁV DINAMIKUS MOBIL MAGASSÁGGAL */
   .drawer { 
     position: fixed; top: 0; right: -450px; width: 450px; max-width: 100vw; 
-    height: 100vh; height: 100dvh; /* Biztosítja, hogy mobil böngészősávok mellett is tökéletes legyen */
+    height: 100vh; height: 100dvh; 
     background: #fff; box-shadow: -14px 0 36px rgba(0,0,0,.15); 
     transition: right .3s ease-in-out; z-index: 99999; display: flex; flex-direction: column; 
   }
@@ -81,19 +104,18 @@
   .cart-item .remove { margin-left: auto; color: #ef4444; cursor: pointer; padding: 4px; }
   .cart-item .remove:hover { color: #b91c1c; }
 
-  .summary { border-top: 1px solid #e2e8f0; padding: 16px; background: #f8fafc; }
+  .summary { border-top: 1px solid #e2e8f0; padding: 16px; background: #faf5ff; }
   .summary .row { display: flex; justify-content: space-between; margin: 8px 0; font-size: 14px; }
   .summary .total { font-weight: 800; font-size: 19px; color: var(--bg-1); margin-top: 12px; border-top: 1px solid #cbd5e1; padding-top: 12px; }
-  .pill { display: inline-flex; align-items: center; gap: 6px; padding: 4px 10px; background: #e0f2fe; color: #0369a1; border-radius: 999px; font-size: 12px; font-weight: 600; }
+  .pill { display: inline-flex; align-items: center; gap: 6px; padding: 4px 10px; background: #f3e8ff; color: #6b21a8; border-radius: 999px; font-size: 12px; font-weight: 600; }
   
   .checkout { padding: 16px; border-top: 1px solid #e2e8f0; }
   .checkout input[type="email"] { width: 100%; padding: 12px 14px; border: 1px solid #cbd5e1; border-radius: 10px; margin-bottom: 12px; font-size: 14px; }
   .checkout input[type="email"]:focus { outline: 2px solid var(--bg-2); }
-  .btn-checkout { width: 100%; background: var(--acc); color: var(--text-dark); padding: 14px; border-radius: 10px; font-weight: 700; border: none; cursor: pointer; font-size: 15px; }
+  .btn-checkout { width: 100%; background: var(--acc); color: var(--bg-1); padding: 14px; border-radius: 10px; font-weight: 700; border: none; cursor: pointer; font-size: 15px; }
   .btn-checkout:hover { opacity: 0.95; }
   .note { color: var(--text-muted); font-size: 12px; text-align: center; margin-top: 8px; line-height: 1.4; }
 
-  /* MOBILRA OPTIMALIZÁLT COMPACT MÉRETEK */
   @media (max-width: 480px) { 
     .hero h1 { font-size: 2rem; } 
     .drawer { width: 100%; } 
@@ -109,14 +131,20 @@
 </head>
 <body>
 
-  <!-- FELSŐ AJÁNLAT BANNER -->
   <div class="top-banner" id="topBanner">
     🔥 Szezonális Akció: Minden kézműves kiegészítőre kedvezmény ezen a héten! 🔥
   </div>
 
-  <!-- HERO SZEKCIÓ (MÁRKANÉV FRISSÍTVE) -->
   <section class="hero">
-    <span class="badge"><i class="fa-solid fa-star"></i> Formex Handmade • Hivatalos Online Bolt</span>
+    <!-- LOGÓ SZEKCIÓ (Ha van képfájlod, cseréld az <i...> sort erre: <img src="logo.png" alt="logo">) -->
+    <div class="brand-logo">
+      <i class="fa-solid fa-wand-magic-sparkles"></i> 
+      <span>Formex Handmade</span>
+    </div>
+    
+    <div>
+      <span class="badge"><i class="fa-solid fa-star"></i> Hivatalos Online Bolt</span>
+    </div>
     <h1>Készülj fel a nyárra stílusosan!</h1>
     <p>Válogass egyedi, kézzel készített prémium kiegészítőink közül. Válaszd ki a kedvenceidet, és add le a rendelésed egyszerűen, sorban állás nélkül.</p>
     <div class="cta">
@@ -158,15 +186,10 @@
   <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 
   <script>
-  // =========================================================================
-  // ✉️ EMAILJS BEÁLLÍTÁSOK
-  // =========================================================================
   const EMAILJS_PUBLIC_KEY = "xioYRLU0KHJvbvzYb";
   const EMAILJS_SERVICE_ID = "service_htmjkvc";
   const EMAILJS_TEMPLATE_ID = "template_fi214eu";
-  // =========================================================================
 
-  // TERMÉK ADATBÁZIS
   const PRODUCTS = [
     {
       id: 'termek1', 
@@ -293,7 +316,7 @@
       buyer_email: email,
       order_lines: lines,
       order_total: fmt(cartSubtotal()),
-      store_name: 'Formex Handmade' // Átírva a kiküldött emailben is
+      store_name: 'Formex Handmade'
     };
 
     try {
