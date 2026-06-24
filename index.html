@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Prémium Webshop • Stílus és Minőség</title>
+  <title>Formex Handmade • Kézműves Csodák</title>
   
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
@@ -61,7 +61,13 @@
   .cart-toggle { position: fixed; right: 24px; bottom: 24px; z-index: 50; display: flex; align-items: center; gap: 10px; border: none; background: var(--bg-1); color: #fff; padding: 16px 20px; border-radius: 50px; box-shadow: 0 10px 25px rgba(0,0,0,.3); cursor: pointer; font-size: 16px; font-weight: 600; }
   #cartCount { background: var(--acc); color: var(--text-dark); padding: 2px 8px; border-radius: 99px; font-size: 13px; font-weight: 700; }
 
-  .drawer { position: fixed; top: 0; right: -450px; width: 450px; max-width: 100vw; height: 100vh; background: #fff; box-shadow: -14px 0 36px rgba(0,0,0,.15); transition: right .3s ease-in-out; z-index: 99999; display: flex; flex-direction: column; }
+  /* KOSÁR OLDALSÁV DINAMIKUS MOBIL MAGASSÁGGAL */
+  .drawer { 
+    position: fixed; top: 0; right: -450px; width: 450px; max-width: 100vw; 
+    height: 100vh; height: 100dvh; /* Biztosítja, hogy mobil böngészősávok mellett is tökéletes legyen */
+    background: #fff; box-shadow: -14px 0 36px rgba(0,0,0,.15); 
+    transition: right .3s ease-in-out; z-index: 99999; display: flex; flex-direction: column; 
+  }
   .drawer.open { right: 0; }
   .drawer header { padding: 20px; border-bottom: 1px solid #e2e8f0; display: flex; align-items: center; justify-content: space-between; background: var(--bg-1); color: white; }
   .drawer h3 { margin: 0; font-size: 18px; display: flex; align-items: center; gap: 8px; }
@@ -87,19 +93,32 @@
   .btn-checkout:hover { opacity: 0.95; }
   .note { color: var(--text-muted); font-size: 12px; text-align: center; margin-top: 8px; line-height: 1.4; }
 
-  @media (max-width: 480px) { .hero h1 { font-size: 2rem; } .drawer { width: 100%; } }
+  /* MOBILRA OPTIMALIZÁLT COMPACT MÉRETEK */
+  @media (max-width: 480px) { 
+    .hero h1 { font-size: 2rem; } 
+    .drawer { width: 100%; } 
+    .drawer header { padding: 14px 16px; }
+    .summary { padding: 10px 16px; }
+    .summary .total { margin-top: 8px; padding-top: 8px; font-size: 17px; }
+    .checkout { padding: 12px 16px; }
+    .checkout input[type="email"] { padding: 10px 12px; margin-bottom: 8px; font-size: 13px; }
+    .btn-checkout { padding: 12px; font-size: 14px; }
+    .note { margin-top: 6px; font-size: 11px; }
+  }
   </style>
 </head>
 <body>
 
+  <!-- FELSŐ AJÁNLAT BANNER -->
   <div class="top-banner" id="topBanner">
-    🔥 Nyári Szezonális Akció: Minden prémium kiegészítőre <strong>-30% kedvezmény</strong> ezen a héten! 🔥
+    🔥 Szezonális Akció: Minden kézműves kiegészítőre kedvezmény ezen a héten! 🔥
   </div>
 
+  <!-- HERO SZEKCIÓ (MÁRKANÉV FRISSÍTVE) -->
   <section class="hero">
-    <span class="badge"><i class="fa-solid fa-star"></i> Stílus és Minőség • Hivatalos Áruház</span>
+    <span class="badge"><i class="fa-solid fa-star"></i> Formex Handmade • Hivatalos Online Bolt</span>
     <h1>Készülj fel a nyárra stílusosan!</h1>
-    <p>Válogass prémium utazási és mindennapi kiegészítőink közül. Válaszd ki a kedvenceidet, és add le a rendelésed egyszerűen, sorban állás nélkül.</p>
+    <p>Válogass egyedi, kézzel készített prémium kiegészítőink közül. Válaszd ki a kedvenceidet, és add le a rendelésed egyszerűen, sorban állás nélkül.</p>
     <div class="cta">
       <a href="#store" class="btn btn-primary"><i class="fa-solid fa-cart-shopping"></i> Kínálat megtekintése</a>
       <a href="#store" class="btn btn-ghost"><i class="fa-regular fa-compass"></i> Újdonságok felfedezése</a>
@@ -107,8 +126,7 @@
   </section>
     
   <main id="store" class="wrap">
-    <div class="grid" id="productGrid">
-      </div>
+    <div class="grid" id="productGrid"></div>
   </main>
     
   <button class="cart-toggle" id="openCart">
@@ -144,7 +162,7 @@
   // ✉️ EMAILJS BEÁLLÍTÁSOK
   // =========================================================================
   const EMAILJS_PUBLIC_KEY = "xioYRLU0KHJvbvzYb";
-  const EMAILJS_SERVICE_ID = "service_htmjkvc";
+  const EMAILJS_SERVICE_ID = "service_3qaeful";
   const EMAILJS_TEMPLATE_ID = "template_fi214eu";
   // =========================================================================
 
@@ -168,7 +186,6 @@
   const fmt = v => `${v} lej`;
   const currentSlide = {};
 
-  // Termékek kirajzolása a főoldalra
   function renderProducts(){
     grid.innerHTML = PRODUCTS.map(p => {
       currentSlide[p.id] = 0; 
@@ -194,7 +211,6 @@
   }
   renderProducts();
 
-  // Képváltó funkció
   function changeSlide(productId, direction) {
     const p = PRODUCTS.find(x => x.id === productId);
     if (!p) return;
@@ -209,7 +225,6 @@
     document.getElementById(`img-${productId}`).style.backgroundImage = `url('${p.images[currentSlide[productId]]}')`;
   }
 
-  // KOSÁR MECHANIKA
   let cart = [];
   function saveCart() { localStorage.setItem('premium-shop-cart', JSON.stringify(cart)); }
   function loadCart() { cart = JSON.parse(localStorage.getItem('premium-shop-cart') || '[]'); }
@@ -264,7 +279,6 @@
   document.getElementById('openCart').onclick = openCart;
   document.getElementById('closeCart').onclick = closeCart;
 
-  // EmailJS Inicializálás a fenti adatokkal
   (function(){ emailjs.init({ publicKey: EMAILJS_PUBLIC_KEY }); })();
 
   document.getElementById('checkoutBtn').onclick = async () => {
@@ -279,7 +293,7 @@
       buyer_email: email,
       order_lines: lines,
       order_total: fmt(cartSubtotal()),
-      store_name: 'Prémium Webshop'
+      store_name: 'Formex Handmade' // Átírva a kiküldött emailben is
     };
 
     try {
@@ -290,7 +304,7 @@
       document.getElementById('buyerEmail').value = '';
     } catch(e) {
       console.error(e);
-      alert('Az oldal automata rendelési funkciója jelenleg nem működik. Kérjük, próbáld újra később!');
+      alert('A rendelés elküldése sikertelen volt. Kérjük, ellenőrizd az EmailJS beállításaidat!');
     }
   };
 
